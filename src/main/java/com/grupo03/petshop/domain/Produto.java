@@ -32,8 +32,8 @@ public class Produto implements Serializable{
 				inverseJoinColumns = @JoinColumn(name = "id_categoria"))	
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	//@ManyToMany(mappedBy = "produtos")
-	//private List<Servico> servicos = new ArrayList<>();
+	@ManyToMany(mappedBy = "produtos")
+	private List<Servico> servicos = new ArrayList<>();
 	
 	public Produto() {
 		
