@@ -7,6 +7,6 @@ import com.grupo03.petshop.domain.Produto;
 
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto,Integer>{
+public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
 
 }

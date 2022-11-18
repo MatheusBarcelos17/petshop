@@ -6,6 +6,6 @@ import com.grupo03.petshop.domain.Categoria;
 
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria,Integer>{
+public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
 
 }
