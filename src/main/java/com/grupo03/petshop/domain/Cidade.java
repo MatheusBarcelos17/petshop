@@ -26,8 +26,8 @@ public class Cidade implements Serializable{
 	@JoinColumn(name = "id_estado")
 	private Estado estado;
 	
-//	@OneToMany(mappedBy = "cidade")
-//	private List<Endereco> enderecos = new ArrayList<>();
+	@OneToMany(mappedBy = "cidade")
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public Cidade() {
 		
