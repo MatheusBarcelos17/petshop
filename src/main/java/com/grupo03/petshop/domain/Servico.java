@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Servico implements Serializable{
@@ -33,11 +33,19 @@ public class Servico implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "servico")
 	private Pagamento pagamento;
 	
-	
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "id_pet")
-	private Pet pet;
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_funcionario")
+	private Funcionario funcionario;
+	
+	
+	//@JsonIgnore
+	//@ManyToOne
+	//@JoinColumn(name = "id_pet")
+	//private Pet pet;
 	
 	@ManyToMany
 	@JoinTable(name = "SERVICO_PRODUTO",
@@ -49,13 +57,15 @@ public class Servico implements Serializable{
 		
 	}
 
-	public Servico(Integer id, Date dataEntrada, Date dataSaida, String descricao, Pet pet) {
+	public Servico(Integer id, Date dataEntrada, Date dataSaida, String descricao, Cliente cliente, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.descricao = descricao;		
-		this.pet = pet;
+		//this.pet = pet;
+		this.cliente = cliente;
+		this.funcionario = funcionario;
 	}
 	
 	@Override
@@ -123,13 +133,13 @@ public class Servico implements Serializable{
 		this.pagamento = pagamento;
 	}
 
-	public Pet getPet() {
-		return pet;
-	}
+	//public Pet getPet() {
+	//	return pet;
+	//}
 
-	public void setPet(Pet pet) {
-		this.pet = pet;
-	}
+	//public void setPet(Pet pet) {
+	//	this.pet = pet;
+	//}
 	
 	public List<Produto> getProdutos() {
 		return produtos;

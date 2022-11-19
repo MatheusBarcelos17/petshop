@@ -1,4 +1,6 @@
 package com.grupo03.petshop.utils;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
@@ -13,18 +15,25 @@ import com.grupo03.petshop.domain.Endereco;
 import com.grupo03.petshop.domain.Especie;
 import com.grupo03.petshop.domain.Estado;
 import com.grupo03.petshop.domain.Funcionario;
+import com.grupo03.petshop.domain.PagCartao;
+import com.grupo03.petshop.domain.PagDinheiro;
+import com.grupo03.petshop.domain.Pagamento;
 import com.grupo03.petshop.domain.Pet;
 import com.grupo03.petshop.domain.Produto;
 import com.grupo03.petshop.domain.Raca;
+import com.grupo03.petshop.domain.Servico;
+import com.grupo03.petshop.domain.enuns.SituacaoPagamento;
 import com.grupo03.petshop.repository.CategoriaRepository;
 import com.grupo03.petshop.repository.CidadeRepository;
 import com.grupo03.petshop.repository.EnderecoRepository;
 import com.grupo03.petshop.repository.EspecieRepository;
 import com.grupo03.petshop.repository.EstadoRepository;
+import com.grupo03.petshop.repository.PagamentoRepository;
 import com.grupo03.petshop.repository.PessoaRepository;
 import com.grupo03.petshop.repository.PetRepository;
 import com.grupo03.petshop.repository.ProdutoRepository;
 import com.grupo03.petshop.repository.RacaRepository;
+import com.grupo03.petshop.repository.ServicoRepository;
 
 @Component
 public class PopulaDados {
@@ -56,8 +65,14 @@ public class PopulaDados {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	ServicoRepository servicoRepository;
+	
+	@Autowired
+	PagamentoRepository pagamentoRepository;
+	
 	@PostConstruct
-	public void cadastrar() {
+	public void cadastrar() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Alimento");
 		Categoria cat2 = new Categoria(null, "Remédio");
@@ -122,5 +137,21 @@ public class PopulaDados {
 		
 		pessoaRepository.saveAll(Arrays.asList(clt1, fnc1));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+				
+		Servico srv1 = new Servico(null, sdf.parse("02/09/2021 09:00"), sdf.parse("02/09/2021 12:00"), "Tosa", clt1, fnc1);
+		Servico srv2 = new Servico(null, sdf.parse("03/09/2021 12:00"), sdf.parse("04/09/2021 12:00"), "Hotel", clt1, fnc1);
+		
+		Pagamento pgt1 = new PagCartao(null, 60.0, SituacaoPagamento.QUITADO, srv2, 6);
+		srv2.setPagamento(pgt1);
+		Pagamento pgt2 = new PagDinheiro(null, 100.0, SituacaoPagamento.PENDENTE, srv1, sdf.parse("02/09/2021 00:00"), null);
+		srv1.setPagamento(pgt2);
+		
+		clt1.getServicos().addAll(Arrays.asList(srv1, srv2));
+		fnc1.getServicos().addAll(Arrays.asList(srv1, srv2));
+		
+		servicoRepository.saveAll(Arrays.asList(srv1, srv2));
+		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2));
 	}
 }

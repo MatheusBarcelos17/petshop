@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento implements Serializable{
+public abstract class Pagamento implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public abstract class Pagamento implements Serializable{
 		this.id = id;
 		this.valor = valor;
 		this.situacao = situacao.getCod();
-		this.setServico(servico);
+		this.servico = servico;
 	}
 
 	@Override
