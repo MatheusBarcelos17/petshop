@@ -32,8 +32,8 @@ public class Pet implements Serializable{
 	@JoinColumn(name = "id_raca")
 	private Raca raca;
 	
-	//@OneToMany(mappedBy = "pet")
-	//private List<Servico> servicos = new ArrayList<>();
+	@OneToMany(mappedBy = "pet")
+	private List<Servico> servicos = new ArrayList<>();
 	
 	
 	public Pet() {
