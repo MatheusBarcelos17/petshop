@@ -6,16 +6,19 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Funcionario extends Pessoa {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private String funcao;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "funcionario")
 	List<Servico> servicos = new ArrayList<>();
-
+	
 	public Funcionario() {
 		
 	}
@@ -40,5 +43,5 @@ public class Funcionario extends Pessoa {
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
 	}
-
+			
 }

@@ -1,5 +1,6 @@
 package com.grupo03.petshop.domain;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Servico implements Serializable{
@@ -41,10 +42,9 @@ public class Servico implements Serializable{
 	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
 	
-	
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToOne
-	//@JoinColumn(name = "id_pet")
+	@JoinColumn(name = "id_pet")
 	private Pet pet;
 	
 	@ManyToMany
@@ -62,7 +62,7 @@ public class Servico implements Serializable{
 		this.id = id;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
-		this.descricao = descricao;
+		this.descricao = descricao;		
 		this.cliente = cliente;
 		this.funcionario = funcionario;
 		this.pet = pet;
@@ -132,14 +132,6 @@ public class Servico implements Serializable{
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
-	
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
 
 	public Pet getPet() {
 		return pet;
@@ -148,7 +140,7 @@ public class Servico implements Serializable{
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
-
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -163,6 +155,14 @@ public class Servico implements Serializable{
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 	
 		
