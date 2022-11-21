@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.grupo03.petshop.domain.Pessoa;
-
+import com.grupo03.petshop.dto.PessoaDTO;
 import com.grupo03.petshop.service.PessoaService;
 
 @RestController
@@ -51,10 +51,11 @@ public class PessoaResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Pessoa>> findAll() {		
+	public ResponseEntity<List<PessoaDTO>> findAll() {		
 		
 		List<Pessoa> list = service.findAll();		
-		return ResponseEntity.ok().body(list);
+		List<PessoaDTO> listDto = list.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 
