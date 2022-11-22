@@ -71,7 +71,7 @@ public class PopulaDados {
 	@Autowired
 	PagamentoRepository pagamentoRepository;
 	
-	@PostConstruct
+	//@PostConstruct
 	public void cadastrar() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Alimento");
