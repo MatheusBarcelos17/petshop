@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.grupo03.petshop.domain.Adocao;
 import com.grupo03.petshop.domain.Categoria;
 import com.grupo03.petshop.domain.Cidade;
 import com.grupo03.petshop.domain.Cliente;
@@ -22,7 +23,9 @@ import com.grupo03.petshop.domain.Pet;
 import com.grupo03.petshop.domain.Produto;
 import com.grupo03.petshop.domain.Raca;
 import com.grupo03.petshop.domain.Servico;
+import com.grupo03.petshop.domain.enuns.SituacaoCastrado;
 import com.grupo03.petshop.domain.enuns.SituacaoPagamento;
+import com.grupo03.petshop.repository.AdocaoRepository;
 import com.grupo03.petshop.repository.CategoriaRepository;
 import com.grupo03.petshop.repository.CidadeRepository;
 import com.grupo03.petshop.repository.EnderecoRepository;
@@ -70,6 +73,10 @@ public class PopulaDados {
 	
 	@Autowired
 	PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	AdocaoRepository adocaoRepository;
+	
 	
 	//@PostConstruct
 	public void cadastrar() throws ParseException {
@@ -162,5 +169,13 @@ public class PopulaDados {
 		
 		servicoRepository.saveAll(Arrays.asList(srv1, srv2, srv3));
 		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2, pgt3));
+		
+		
+		Adocao adocaoPet1 = new Adocao(null, "Diana", "Cachorro", 3, SituacaoCastrado.CASTRADO);
+		Adocao adocaoPet2 = new Adocao(null, "Joaquim", "Gato", 3, SituacaoCastrado.CASTRADO);
+		Adocao adocaoPet3 = new Adocao(null, "Pitoco", "Cachorro", 10, SituacaoCastrado.NAO_CASTRADO);
+		
+		
+		adocaoRepository.saveAll(Arrays.asList(adocaoPet1, adocaoPet2, adocaoPet3));
 	}
 }
